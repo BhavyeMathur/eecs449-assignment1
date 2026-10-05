@@ -1,0 +1,7 @@
+.jac/
+dist/
+node_modules/
+.vscode/
+.idea/
+uploads/
+.DS_Store

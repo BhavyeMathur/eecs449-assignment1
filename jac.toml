@@ -1,0 +1,78 @@
+[project]
+name = "daybook"
+version = "0.1.0"
+description = "A photo-first daily planner and journal with intentions and threads"
+jac-version = "==0.37.14"
+default-app = "web"
+
+[dependencies]
+[dependencies.npm]
+react = "^19.2.0"
+react-dom = "^19.2.0"
+react-router-dom = "^6.22.0"
+react-error-boundary = "^5.0.0"
+"@tanstack/react-form" = "^1.33.0"
+zod = "^4.3.6"
+
+[dependencies.npm.dev]
+vite = "^6.4.1"
+"@vitejs/plugin-react" = "^4.7.0"
+typescript = "^5.3.3"
+"@types/react" = "^19.2.0"
+"@types/react-dom" = "^19.2.0"
+
+
+
+[dev-dependencies]
+watchdog = ">=3.0.0"
+
+[dev]
+test_jobs = "0"
+
+[client]
+
+[placement.pins]
+"core.journal" = "server"
+"core.rules" = "server"
+
+[apps.web]
+kind = "web-app"
+entry-point = "web.main"
+
+[apps.server]
+kind = "service"
+entry-point = "core.journal"
+
+[apps.mobile]
+kind = "mobile"
+entry-point = "mobile.main"
+
+[apps.mobile.dependencies.npm]
+react = "^18.2.0"
+react-dom = "^18.2.0"
+react-native-web = "^0.19.13"
+react-native-svg = "^15.13.0"
+lucide-react = "^0.469.0"
+lucide-react-native = "^0.469.0"
+
+[apps.mobile.dependencies.npm.native]
+react-native-svg = "^15.13.0"
+lucide-react-native = "^0.469.0"
+expo-image-picker = "*"
+expo-notifications = "*"
+
+[apps.cli]
+kind = "cli"
+entry-point = "cli.main"
+
+[test]
+directory = "tests"
+
+[check]
+[check.lint]
+ignore = ["no-print"]
+
+[client.app_meta_data]
+title = "Daybook"
+description = "A photo-first daily planner and record of everyday life"
+theme_color = "#f3efe7"
