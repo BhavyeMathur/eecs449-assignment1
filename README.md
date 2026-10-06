@@ -10,6 +10,24 @@ the day: work, food, coffee chats, events, people, and ordinary details. Moments
 can belong to reusable **threads** such as `Coffee chats`, `Research`, or
 `Campus light`, creating stories that continue across otherwise separate days.
 
+## Daybook in action
+
+The screenshots below come from the running app with representative moments and
+photos. They show the same shared journal from three useful perspectives.
+
+![Daybook daily photo timeline with moments and reusable threads](docs/screenshots/daybook-timeline.png)
+
+<table>
+  <tr>
+    <td width="70%"><img src="docs/screenshots/daybook-calendar.png" alt="Daybook photo calendar with a populated day selected"></td>
+    <td width="30%"><img src="docs/screenshots/daybook-mobile-capture.png" alt="Daybook mobile-width add moment flow"></td>
+  </tr>
+  <tr>
+    <td><strong>Visual calendar.</strong> Photo-backed days make the archive scannable, while the selected-day panel gives immediate context.</td>
+    <td><strong>Focused capture.</strong> Add photos, a caption, a moment kind, and reusable threads without leaving the flow.</td>
+  </tr>
+</table>
+
 ## Main features
 
 - Plan one meaningful intention for any day, then complete, reopen, or remove it.
@@ -47,9 +65,12 @@ the photo story records what the day became. Its four clients are not separate
 demos: they share typed models, durable state, thread normalization, validation,
 photo access control, and deletion behavior. The web interface supports
 multi-photo drag-and-drop and a visual calendar, while the native mobile client
-adds camera capture and idempotent local reminder scheduling.
+adds camera capture and idempotent local reminder scheduling. The interface is
+deliberately photo-led and responsive, with meaningful empty states, keyboard-
+accessible controls, interactive cards, and confirmation before destructive
+actions.
 
-## Prerequisites
+## Prerequisites and fresh-checkout setup
 
 - macOS, Linux, or Windows with a terminal
 - Jac `0.37.14` (the version pinned in `jac.toml`)
@@ -62,15 +83,18 @@ Install Jac if needed:
 curl -fsSL https://jaclang.org/install.sh | bash
 ```
 
-After cloning the repository, install dependencies from its root:
+Clone the submission and install its dependencies from the repository root:
 
 ```bash
-cd daybook
+git clone https://github.com/BhavyeMathur/eecs449-assignment1.git
+cd eecs449-assignment1
 jac install
 ```
 
 If `jac` is not found after installation, add `$HOME/.local/bin` to your
-`PATH` as prompted by the installer.
+`PATH` as prompted by the installer. Daybook requires no API keys or external
+service configuration for local use; Jac provides the shared local persistence
+layer.
 
 ## Run the web app and server
 
@@ -111,6 +135,10 @@ requested. It asks for notification permission on first launch and schedules a
 single daily 8 PM reminder, reusing the existing Daybook reminder on later
 launches.
 
+The mobile client uses the same server API and graph data as the web app and
+CLI. The browser preview is useful for checking layout and ordinary interactions;
+camera, library, and notification permissions must be tested natively.
+
 ## Use the CLI
 
 Keep `jac run` running in one terminal. In a second terminal, from the same
@@ -147,3 +175,15 @@ planning lifecycle, photo retrieval and deletion, orphan cleanup, and CLI
 argument contracts. Native camera and notification behavior must additionally
 be checked on an iOS or Android simulator/device because a browser cannot
 validate OS-level permissions or scheduled notifications.
+
+## Suggested grading walkthrough
+
+1. Run `jac run` and open `http://localhost:8000`.
+2. Set a daily intention, add a text or photo moment, and attach an existing or
+   new thread.
+3. Browse the same data through **Today**, **Calendar**, and **Threads**, then
+   open a moment to view or delete it.
+4. Keep the server running and use the CLI commands above to add or complete a
+   plan; refresh the web view to see the shared state.
+5. Launch the mobile preview or native app and confirm that it reads and writes
+   the same Daybook.
